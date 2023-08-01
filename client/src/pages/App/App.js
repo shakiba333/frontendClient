@@ -23,19 +23,19 @@ export default function App() {
   //     .catch((error) => console.log(error))
   // }
 
-  async function getPosts(){
+  async function getPosts() {
     try {
-      const res = await axios.get('http://localhost:3000/api/posts')
+      const res = await axios.get('https://techblog.fly.dev/api/posts')
       setPosts(res.data)
       console.log(res.data)
-    } catch (err){
+    } catch (err) {
       console.error(err)
     }
   }
 
 
   const handleCreate = (createdPost) => {
-    axios.post('http://localhost:3000/api/posts', createdPost)
+    axios.post('https://techblog.fly.dev/api/posts', createdPost)
       .then((response) => {
         setPosts([...posts, response.data])
       })
@@ -43,7 +43,7 @@ export default function App() {
 
 
   const handleEdit = (editedPost) => {
-    axios.put('http://localhost:3000/api/posts/' + editedPost._id, editedPost)
+    axios.put('https://techblog.fly.dev/api/posts/' + editedPost._id, editedPost)
       .then((response) => {
         let newPost = posts.map((post) => {
           return post._id !== editedPost._id ? post : editedPost
@@ -53,7 +53,7 @@ export default function App() {
   }
 
   const handleDelete = (deletedPost) => {
-    axios.delete('http://localhost:3000/api/posts/' + deletedPost)
+    axios.delete('https://techblog.fly.dev/api/posts/' + deletedPost)
       .then((response) => {
         let newPosts = posts.filter((post) => {
           return post._id !== deletedPost
@@ -68,96 +68,96 @@ export default function App() {
   }, [])
 
 
- 
-      if(page === null || page === "null"){
-        return (
-          <>
-          <NavBar setPage={setPage} setCurrentArticle={setCurrentArticle}/>
-         
-              <Routes>
-                <Route 
-                    path="/" 
-                    element={
-                      <HomePage setPage={setPage}/>
-                    }>
 
-                </Route>
-              </Routes>
-          </>
-        )
-      }
+  if (page === null || page === "null") {
+    return (
+      <>
+        <NavBar setPage={setPage} setCurrentArticle={setCurrentArticle} />
 
-      if(page === "index" || page === "indexUpdate"){
-        return (
-            <>
-              <NavBar setPage={setPage} setCurrentArticle={setCurrentArticle}/>
-              {/* <h1>All Posts</h1> */}
-              <Routes>
-                <Route 
-                    path="/" 
-                    element={
-                      <Post 
-                      posts={posts} 
-                      currentArticle={currentArticle} 
-                      setCurrentArticle={setCurrentArticle} 
-                      handleDelete={handleDelete}
-                      handleEdit={handleEdit}
-                      setPage={setPage}
-                      />
-                    }>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage setPage={setPage} />
+            }>
 
-                </Route>
-              </Routes>
-            </>
+          </Route>
+        </Routes>
+      </>
+    )
+  }
 
-        )
-      }
+  if (page === "index" || page === "indexUpdate") {
+    return (
+      <>
+        <NavBar setPage={setPage} setCurrentArticle={setCurrentArticle} />
+        {/* <h1>All Posts</h1> */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Post
+                posts={posts}
+                currentArticle={currentArticle}
+                setCurrentArticle={setCurrentArticle}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+                setPage={setPage}
+              />
+            }>
 
-      if(page === "postform"){
-        return (
-            <>
-              <NavBar setPage={setPage} setCurrentArticle={setCurrentArticle}/>
-              {/* <h1>All Posts</h1> */}
-              <Routes>
-                <Route 
-                    path="/" 
-                    element={
-                      <PostForm handleCreate={handleCreate} setPage={setPage}/>
-                    }>
+          </Route>
+        </Routes>
+      </>
 
-                </Route>
-              </Routes>
-            </>
+    )
+  }
 
-        )
-      }
+  if (page === "postform") {
+    return (
+      <>
+        <NavBar setPage={setPage} setCurrentArticle={setCurrentArticle} />
+        {/* <h1>All Posts</h1> */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PostForm handleCreate={handleCreate} setPage={setPage} />
+            }>
 
-      // if(page === "detail"){
-      //   return (
-      //       <>
-      //         <NavBar setPage={setPage}/>
-      //         {/* <h1>All Posts</h1> */}
-      //         <Routes>
-      //           <Route 
-      //               path="/" 
-      //               element={
-      //                 <PostDetail id={id}/>
-      //               }>
+          </Route>
+        </Routes>
+      </>
 
-      //           </Route>
-      //         </Routes>
-      //       </>
+    )
+  }
 
-      //   )
-      // }
-    
-      
+  // if(page === "detail"){
+  //   return (
+  //       <>
+  //         <NavBar setPage={setPage}/>
+  //         {/* <h1>All Posts</h1> */}
+  //         <Routes>
+  //           <Route 
+  //               path="/" 
+  //               element={
+  //                 <PostDetail id={id}/>
+  //               }>
 
-         
-         
+  //           </Route>
+  //         </Routes>
+  //       </>
+
+  //   )
+  // }
 
 
-      
-      
+
+
+
+
+
+
+
 
 }
